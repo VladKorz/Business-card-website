@@ -57,6 +57,41 @@ const handleSubmit = async () => {
           <h3>СВЯЗАТЬСЯ СО МНОЙ</h3>
           <p>Не стесняйтесь обращаться для сотрудничества, обсуждения проектов или просто поздороваться. Я всегда открыт для обсуждения новых проектов и творческих идей.</p>
           
+          <form @submit.prevent="handleSubmit" class="contact-form">
+            <div class="form-group">
+              <input
+                v-model="name"
+                type="text"
+                placeholder="Ваше имя"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                v-model="email"
+                type="email"
+                placeholder="Ваш email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                v-model="message"
+                placeholder="Ваше сообщение"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" :disabled="sending">
+              {{ sending ? 'Отправка...' : 'Отправить сообщение' }}
+            </button>
+            <p v-if="submitted" class="success-message">
+              Спасибо за ваше сообщение! Я свяжусь с вами в ближайшее время.
+            </p>
+            <p v-if="error" class="error-message">
+              Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.
+            </p>
+          </form>
+
           <div class="info-items">
             <div class="info-item">
               <div class="info-icon">
@@ -207,5 +242,66 @@ const handleSubmit = async () => {
   .contact-info p {
     font-size: 1rem;
   }
+}
+
+.contact-form {
+  margin-bottom: 3rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+button[type="submit"] {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--accent-color-hover);
+}
+
+button[type="submit"]:disabled {
+  background-color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.success-message {
+  color: #4CAF50;
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #f44336;
+  margin-top: 1rem;
 }
 </style>
