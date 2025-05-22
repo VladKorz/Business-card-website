@@ -246,17 +246,60 @@ import ThreeScene from './ThreeScene.vue';
   }
 }
 
+.small {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 5px;
+}
+
 @media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 3rem;
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding: 4rem 2rem;
   }
-  
+
+  .hero-text {
+    max-width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .title-line {
+    margin: 1rem auto;
+  }
+
   .hero-text h2 {
     font-size: 1.5rem;
   }
-  
+
   .hero-text p {
     font-size: 1rem;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  .hero-model {
+    height: 300px;
+    width: 100%;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+  
+  .model-info {
+    bottom: auto;
+    top: 20px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 

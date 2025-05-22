@@ -55,4 +55,14 @@ onMounted(() => {
 main {
   flex: 1;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
 </style>

@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import emailjs from '@emailjs/browser';
-
-const name = ref('');
-const email = ref('');
-const message = ref('');
-const sending = ref(false);
-const submitted = ref(false);
-const error = ref(false);
 
 // Contact information
 const contactInfo = {
@@ -17,34 +8,6 @@ const contactInfo = {
   github: 'VladKorz'
 };
 
-const handleSubmit = async () => {
-  sending.value = true;
-  error.value = false;
-  
-  try {
-    await emailjs.send(
-      'service_3armr48', // Замените на ваш Service ID из EmailJS
-      'YOUR_TEMPLATE_ID', // Замените на ваш Template ID из EmailJS
-      {
-        from_name: name.value,
-        from_email: email.value,
-        message: message.value,
-        to_email: contactInfo.email,
-      },
-      'fw_Rs143cI6myt6aL' // Замените на ваш Public Key из EmailJS
-    );
-    
-    submitted.value = true;
-    name.value = '';
-    email.value = '';
-    message.value = '';
-  } catch (err) {
-    error.value = true;
-    console.error('Failed to send email:', err);
-  } finally {
-    sending.value = false;
-  }
-};
 </script>
 
 <template>
@@ -56,41 +19,6 @@ const handleSubmit = async () => {
         <div class="contact-info">
           <h3>СВЯЗАТЬСЯ СО МНОЙ</h3>
           <p>Не стесняйтесь обращаться для сотрудничества, обсуждения проектов или просто поздороваться. Я всегда открыт для обсуждения новых проектов и творческих идей.</p>
-          
-          <form @submit.prevent="handleSubmit" class="contact-form">
-            <div class="form-group">
-              <input
-                v-model="name"
-                type="text"
-                placeholder="Ваше имя"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <input
-                v-model="email"
-                type="email"
-                placeholder="Ваш email"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <textarea
-                v-model="message"
-                placeholder="Ваше сообщение"
-                required
-              ></textarea>
-            </div>
-            <button type="submit" :disabled="sending">
-              {{ sending ? 'Отправка...' : 'Отправить сообщение' }}
-            </button>
-            <p v-if="submitted" class="success-message">
-              Спасибо за ваше сообщение! Я свяжусь с вами в ближайшее время.
-            </p>
-            <p v-if="error" class="error-message">
-              Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.
-            </p>
-          </form>
 
           <div class="info-items">
             <div class="info-item">

@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -68,35 +69,72 @@ function initThree() {
   
   // Load 3D model
   const loader = new OBJLoader();
-  loader.load(
-    '/src/3DModel_LowPoly/3DModel_LowPoly.obj',
-    (object: THREE.Group) => {
-      model = object;
-      model.scale.set(15, 15, 15);
-      model.rotation.y = 0;
-      model.rotation.z = Math.PI / -2;
-      model.rotation.x = 0;
-      model.position.set(0, 0, 0);
-      
-      // Add material to the model
-      model.traverse((child) => {
-        if (child instanceof THREE.Mesh) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0xff3c00,
-            metalness: 0.3,
-            roughness: 0.4,
-            wireframe: true
+  const mtlLoader = new MTLLoader();
+
+  mtlLoader.load(
+    'models/3DModel_LowPoly/3DModel_LowPoly.mtl',
+    (materials) => {
+      materials.preload();
+      loader.setMaterials(materials);
+      loader.load(
+        'models/3DModel_LowPoly/3DModel_LowPoly.obj',
+        (object: THREE.Group) => {
+          model = object;
+          model.scale.set(15, 15, 15);
+          model.rotation.y = 0;
+          model.rotation.z = Math.PI / -2;
+          model.rotation.x = 0;
+          model.position.set(0, 0, 0);
+          
+          // Add material to the model (only if no material in .mtl)
+          model.traverse((child) => {
+            if (child instanceof THREE.Mesh && !child.material) {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0xff3c00,
+                metalness: 0.3,
+                roughness: 0.4,
+                wireframe: true
+              });
+            }
           });
+          
+          scene.add(model);
+          
+          // Calculate camera position to fit the model
+          const boundingBox = new THREE.Box3().setFromObject(model);
+          const center = new THREE.Vector3();
+          const size = new THREE.Vector3();
+          boundingBox.getCenter(center);
+          boundingBox.getSize(size);
+
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const fov = camera.fov * (Math.PI / 180);
+          let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+          
+          // Add some padding
+          cameraZ *= 1.2;
+          
+          camera.position.z = cameraZ;
+          camera.position.copy(center);
+          camera.position.z = cameraZ; // Reset Z after copying center
+          
+          // Update controls target
+          controls.target.copy(center);
+          controls.update();
+        },
+        (xhr: ProgressEvent) => {
+          console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        (error: unknown) => {
+          console.error('An error happened while loading the OBJ model:', error);
         }
-      });
-      
-      scene.add(model);
+      );
     },
     (xhr: ProgressEvent) => {
       console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
     (error: unknown) => {
-      console.error('An error happened while loading the model:', error);
+      console.error('An error happened while loading the MTL file:', error);
     }
   );
 }
