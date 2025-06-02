@@ -1,8 +1,14 @@
 <script setup lang="ts">
 const skills = [
-  { name: 'Спать', level: 99 },
-  { name: 'Смотреть сериалы', level: 99 },
-  { name: 'Вкусно кушать', level: 99 },
+  { name: 'Разработка кода ИС', level: 70 },
+  { name: 'Проектирование и дизайн ИС', level: 60 },
+  { name: 'Тестирование ИС', level: 75 },
+  { name: 'Компьютерные сети', level: 49 },
+  { name: 'Базы данных', level: 60 },
+  { name: 'Управление проектами', level: 90 },
+  { name: 'Сборка и ремонт ПК', level: 90 },
+  { name: 'Настройка и работа с ОС Windows и Linux', level: 70 },
+  { name: 'C# Unity', level: 90 },
 ];
 </script>
 
@@ -12,28 +18,10 @@ const skills = [
       <h2>ОБО МНЕ</h2>
       <div class="about-content">
         <div class="about-text">
-          <p>Я в своем познании настолько преисполнился, что я как будто бы уже
-
-сто триллионов миллиардов лет проживаю на триллионах и
-
-триллионах таких же планет, как эта Земля, мне этот мир абсолютно
-
-понятен, и я здесь ищу только одного - покоя, умиротворения и
-
-вот этой гармонии, от слияния с бесконечно вечным, от созерцания
-
-великого фрактального подобия и от вот этого замечательного всеединства
-
-существа, бесконечно вечного, куда ни посмотри, хоть вглубь - бесконечно
-
-малое, хоть ввысь - бесконечное большое, понимаешь? А ты мне опять со
-
-своим вот этим, иди суетись дальше, это твоё распределение, это
-
-твой путь и твой горизонт познания и ощущения твоей природы, он
-
-несоизмеримо мелок по сравнению с моим, понимаешь?</p>
-          
+          <p>Я начинающий специалист , который стремится к самосовершенствованию и постоянно расширяет свои навыки в области разработки и проектирования информационных систем. Моя цель - стать профессиональным разработчиком, который сможет создавать эффективные и инновационные решения для различных отраслей бизнеса.</p>  
+          <P>Имя: Владислав</P>
+          <p>Образование: Cреднее специальное, 2025, МФПУ «Синергия», Москва, Информационные системы и программирование</p>
+          <P>Родился: 27 февраля 2006</P>
           <div class="about-cta">
             <a href="#portfolio" class="about-btn">СМОТРЕТЬ РАБОТЫ</a>
             <a href="/resume.pdf" target="_blank" class="about-btn outline">СКАЧАТЬ РЕЗЮМЕ</a>
@@ -53,6 +41,7 @@ const skills = [
               </div>
             </div>
           </div>
+          <h4>!Процент освоения — субъективная оценка!</h4>
         </div>
       </div>
     </div>
@@ -60,6 +49,7 @@ const skills = [
 </template>
 
 <style scoped>
+
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -116,6 +106,13 @@ const skills = [
   display: inline-block;
 }
 
+.skills h4 {
+  margin-top: 1rem;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
 .skills h3::after {
   content: '';
   position: absolute;
@@ -152,20 +149,17 @@ const skills = [
 
 .skill-bar {
   height: 10px;
+  width: 100%;
   background-color: var(--secondary-bg);
-  border-radius: 0;
+  border-radius: 5px;
   overflow: hidden;
-  position: relative;
 }
 
 .skill-level {
   height: 100%;
   background-color: var(--accent-color);
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: skill-fill 1.5s ease-out forwards;
-  width: 0;
+  transition: width 0.8s ease-out;
+  border-radius: 5px;
 }
 
 @keyframes skill-fill {

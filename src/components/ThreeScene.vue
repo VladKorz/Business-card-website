@@ -76,29 +76,29 @@ function initThree() {
     (materials) => {
       materials.preload();
       loader.setMaterials(materials);
-      loader.load(
+  loader.load(
         'models/3DModel_LowPoly/3DModel_LowPoly.obj',
-        (object: THREE.Group) => {
-          model = object;
-          model.scale.set(15, 15, 15);
-          model.rotation.y = 0;
-          model.rotation.z = Math.PI / -2;
-          model.rotation.x = 0;
-          model.position.set(0, 0, 0);
-          
+    (object: THREE.Group) => {
+      model = object;
+      model.scale.set(15, 15, 15);
+      model.rotation.y = 0;
+      model.rotation.z = Math.PI / -2;
+      model.rotation.x = 0;
+      model.position.set(0, 0, 0);
+      
           // Add material to the model (only if no material in .mtl)
-          model.traverse((child) => {
+      model.traverse((child) => {
             if (child instanceof THREE.Mesh && !child.material) {
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0xff3c00,
-                metalness: 0.3,
-                roughness: 0.4,
-                wireframe: true
-              });
-            }
+          child.material = new THREE.MeshStandardMaterial({
+            color: 0xff3c00,
+            metalness: 0.3,
+            roughness: 0.4,
+            wireframe: true
           });
-          
-          scene.add(model);
+        }
+      });
+      
+      scene.add(model);
           
           // Calculate camera position to fit the model
           const boundingBox = new THREE.Box3().setFromObject(model);

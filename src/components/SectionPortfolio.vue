@@ -1,52 +1,42 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-const categories = ['Все', '3D Модели', 'Веб-разработка', 'UI/UX Дизайн'];
+const categories = ['Все', 'Пет-проект', 'Коммерческая разработка', 'Игры'];
 const activeCategory = ref('Все');
 
 const projects = [
   {
     id: 1,
-    title: 'Киберпанк персонаж',
-    category: '3D Модели',
-    image: 'https://images.pexels.com/photos/6330644/pexels-photo-6330644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Полностью ригнутый 3D персонаж, созданный для независимой игровой студии.'
+    title: 'Окуп баньки',
+    category: 'Пет-проект',
+    image: 'assets/pet.pro.jpg',
+    description: 'Это простое веб-приложение на Vue с БД для отслеживания доходов/расходов бани и расчета ее окупаемости.',
+    link: 'https://github.com/VladKorz'
   },
   {
     id: 2,
-    title: 'Панель управления интернет-магазина',
-    category: 'Веб-разработка',
-    image: 'https://images.pexels.com/photos/6956183/pexels-photo-6956183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Админ-панель на React с визуализацией данных в реальном времени.'
+    title: '---',
+    category: 'Коммерческая разработка',
+    image: 'https://images.',
+    description: '---',
+    link: 'https://github.com/VladKorz'
   },
   {
     id: 3,
-    title: 'Интерфейс музыкального приложения',
-    category: 'UI/UX Дизайн',
-    image: 'https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Музыкальное приложение в темной теме с акцентом на доступность.'
+    title: '---',
+    category: 'Игры',
+    image: 'https://images.',
+    description: '---',
+    link: 'https://github.com/VladKorz'
   },
   {
     id: 4,
-    title: 'Научно-фантастическая среда',
-    category: '3D Модели',
-    image: 'https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Футуристическая сцена с процедурными материалами и освещением.'
+    title: '---',
+    category: 'учебный проект',
+    image: 'https://images.',
+    description: '---',
+    link: 'https://github.com/VladKorz'
   },
-  {
-    id: 5,
-    title: 'Трекер криптовалют',
-    category: 'Веб-разработка',
-    image: 'https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Приложение для отслеживания криптовалют на Vue.js с интеграцией API в реальном времени.'
-  },
-  {
-    id: 6,
-    title: 'Приложение умного дома',
-    category: 'UI/UX Дизайн',
-    image: 'https://images.pexels.com/photos/4144179/pexels-photo-4144179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Минималистичный интерфейс для управления системами домашней автоматизации.'
-  }
 ];
 
 const filteredProjects = computed(() => {
@@ -89,7 +79,7 @@ function setCategory(category: string) {
               <div class="overlay-content">
                 <h3>{{ project.title }}</h3>
                 <p>{{ project.description }}</p>
-                <a href="#" class="view-project">СМОТРЕТЬ ПРОЕКТ</a>
+                <a :href="project.link" target="_blank" rel="noopener" class="view-project">СМОТРЕТЬ ПРОЕКТ</a>
               </div>
             </div>
           </div>
