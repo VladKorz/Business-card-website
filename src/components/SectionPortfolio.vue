@@ -1,41 +1,90 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-const categories = ['Все', 'Пет-проект', 'Коммерческая разработка', 'Игры'];
+const categories = ['Все', 'Пет-проект', 'Учебный проект', 'Игра', 'Сборка и настройка ЭВМ'];
 const activeCategory = ref('Все');
 
 const projects = [
   {
+    a: 1,
     id: 1,
     title: 'Окуп баньки',
     category: 'Пет-проект',
     image: 'assets/pet.pro.jpg',
     description: 'Это простое веб-приложение на Vue с БД для отслеживания доходов/расходов бани и расчета ее окупаемости.',
-    link: 'https://github.com/VladKorz'
+    link: 'https://github.com/VladKorz/BANY_OKUP'
   },
   {
+    a: 1,
     id: 2,
-    title: '---',
-    category: 'Коммерческая разработка',
-    image: 'https://images.',
-    description: '---',
-    link: 'https://github.com/VladKorz'
+    title: 'ВКР',
+    category: 'Учебный проект',
+    image: 'assets/diplom.jpg',
+    description: 'Это проектное решение моей выпускной квалификационной работы. Для ознакомления с проектом рекомендуется начать с презентации.',
+    link: 'https://github.com/VladKorz/diplom'
   },
   {
+    a: 1,
     id: 3,
-    title: '---',
-    category: 'Игры',
-    image: 'https://images.',
-    description: '---',
-    link: 'https://github.com/VladKorz'
+    title: 'Business-card-website',
+    category: 'Пет-проект',
+    image: 'assets/BC.jpg',
+    description: 'Собственно, вы сейчас изучаете этот проект в реальном времени.',
+    link: 'https://github.com/VladKorz/Business-card-website'
   },
   {
+    a: 1,
     id: 4,
-    title: '---',
-    category: 'учебный проект',
-    image: 'https://images.',
-    description: '---',
-    link: 'https://github.com/VladKorz'
+    title: 'Побег от Фредди!',
+    category: 'Игра',
+    image: 'assets/image.png',
+    description: 'Эту игру получилось опубликовать в Яндекс Игры. Но ее удалили из-за низкого спроса. Сейчас в нее можно поиграть только в черновике.',
+    link: 'https://clck.ru/3MPbmi'
+  },
+  {
+    a: 1,
+    id: 5,
+    title: 'Ohota Na NextBota',
+    category: 'Игра',
+    image: 'assets/ohota.jpg',
+    description: 'Это весёлый шутер, который у меня не получилось закончить.',
+    link: 'https://github.com/VladKorz/OhotaNaNextBota'
+  },
+  {
+    a: 0,
+    id: 6,
+    title: 'Влад gpt',
+    category: 'Пет-проект',
+    image: 'assets/gpt.jpg',
+    description: 'Это проект, который не был завершён в полной мере. Изначально его планировали сделать общедоступным и коммерчески успешным, но в итоге он распространился лишь в узком кругу пользователей и на бесплатной основе.',
+    link: ''
+  },
+  {
+    a: 0,
+    id: 7,
+    title: 'Ферма на GPU',
+    category: 'Сборка и настройка ЭВМ',
+    image: 'assets/mf.jpg',
+    description: 'Сборка майнинг фермы на GPU. Даа, я и таким занимался. Самое увлекательное в этом проекте было разбираться с сетевыми и другими настройками в терминале RaveOS.',
+    link: ''
+  },
+    {
+    a: 0,
+    id: 8,
+    title: 'Сборка ПК',
+    category: 'Сборка и настройка ЭВМ',
+    image: 'assets/pc.jpg',
+    description: 'Я собирал компы на заказ. Конкретно этот на Хеоn Е5 2643v4, 16 гб ddr4 и 2060 super.',
+    link: ''
+  },
+    {
+    a: 1,
+    id: 9,
+    title: 'Курсовая по УАБД',
+    category: 'Учебный проект',
+    image: 'assets/db.jpg',
+    description: 'Сейчас, с высоты моего опыта, я не считаю эту работу выдающейся, но в своё время она значительно углубила моё понимание темы.',
+    link: 'https://drive.google.com/file/d/1-mJDjrksUgxAZXbeGBD1B2j_7CyTLEGo/view?usp=drive_link'
   },
 ];
 
@@ -55,6 +104,7 @@ function setCategory(category: string) {
   <section id="portfolio" class="section">
     <div class="container">
       <h2>ПОРТФОЛИО</h2>
+      <H3>Здесь представлены мои наиболее значимые проекты.</H3>
       
       <div class="portfolio-filter">
         <button 
@@ -79,7 +129,15 @@ function setCategory(category: string) {
               <div class="overlay-content">
                 <h3>{{ project.title }}</h3>
                 <p>{{ project.description }}</p>
-                <a :href="project.link" target="_blank" rel="noopener" class="view-project">СМОТРЕТЬ ПРОЕКТ</a>
+                <a 
+                  v-if="project.a === 1"
+                  :href="project.link" 
+                  target="_blank" 
+                  rel="noopener" 
+                  class="view-project"
+                >
+                  СМОТРЕТЬ ПРОЕКТ
+                </a>
               </div>
             </div>
           </div>

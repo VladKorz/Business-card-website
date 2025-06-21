@@ -4,7 +4,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const links = [
   { name: 'ГЛАВНАЯ', href: '#hero' },
   { name: 'ОБО МНЕ', href: '#about' },
-  { name: 'ДОСТИЖЕНИЯ', href: '#achievements' },
+  //{ name: 'ДОСТИЖЕНИЯ', href: '#achievements' },
   { name: 'ПОРТФОЛИО', href: '#portfolio' },
   { name: 'КОНТАКТЫ', href: '#contact' }
 ];

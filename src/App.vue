@@ -3,7 +3,7 @@ import { onMounted } from 'vue';
 import Navbar from './components/Navbar.vue';
 import SectionHero from './components/SectionHero.vue';
 import SectionAbout from './components/SectionAbout.vue';
-import SectionAchievements from './components/SectionAchievements.vue';
+// import SectionAchievements from './components/SectionAchievements.vue';
 import SectionPortfolio from './components/SectionPortfolio.vue';
 import SectionContact from './components/SectionContact.vue';
 import FooterSection from './components/FooterSection.vue';
